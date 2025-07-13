@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+import gi
+gi.require_version('WebKit2', '4.1')
+from gi.repository import WebKit2
+
+
+from gi.repository import Gtk, WebKit2
+
+class BagreBrowser(Gtk.Window):
+    def __init__(self):
+        Gtk.Window.__init__(self, title="Bagre for GNOME")
+        self.set_default_size(800, 600)
+
+        webview = WebKit2.WebView()
+        webview.load_uri("https://bagremedicina.netlify.app/")
+
+        scrolled_window = Gtk.ScrolledWindow()
+        scrolled_window.add(webview)
+
+        self.add(scrolled_window)
+
+win = BagreBrowser()
+win.connect("destroy", Gtk.main_quit)
+win.show_all()
+Gtk.main()
